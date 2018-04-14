@@ -1,0 +1,51 @@
+
+//lucky Palindrome
+
+function solution(S) {
+    // write your code in JavaScript (Node.js 8.9.4)
+    var maxLength = 0, maxP = '';
+    
+    for(var i=0;i<S.length; i++) {
+        var subs = S.substr(i, S.length);
+        for(var j=subs.length;j>=0;j--) {
+            var sub_str = subs.substr(0, j);
+            if(sub_str.length <= 1) 
+            continue;
+            if(isPalindrome(sub_str) === true) {
+                if(sub_str.length > maxLength) {
+                    maxLength = sub_str.length;
+                    maxP = sub_str;
+                }
+            }
+            
+        }
+    }
+    console.log("checkPrimeNumber(maxLength) => ", checkPrimeNumber(maxLength))
+    if(checkPrimeNumber(maxLength) === true) {
+        return "YES";
+    } else {
+        return "NO";
+    }
+    
+    
+}
+
+function isPalindrome(str) {
+    var rev = str.split("").reverse().join("");
+    return rev === str;
+}
+
+function checkPrimeNumber(number) {
+    if(number === 1) {
+        return false;
+    } else if(number === 2) {
+        return true;
+    } else {
+        for(var i=2;i<number;i++) {
+            if(number % i === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
